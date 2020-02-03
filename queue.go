@@ -57,8 +57,8 @@ func(s *SliceQueue)DeQueue()element{
     if s.IsEmpty(){
         return nil
     }
-    ret := s.array[s.Size()-1]
-    s.array = s.array[:s.Size()-1]
+    ret := s.array[0]
+    s.array = s.array[1:s.Size()]
     return ret
 }
 
@@ -68,7 +68,7 @@ func(s *SliceQueue)EnQueue(data element){
     s.array = append(s.array,data)
 }
 
-func(s *SliceQueue)EnQueueFrint(data element){
+func(s *SliceQueue)EnQueueFrist(data element){
     s.Lock()
     defer s.Unlock()
     newQueue := []element{data}
@@ -124,6 +124,14 @@ func(p *LinkedQueue)EnQueue(data element){
         p.end.Next = node
         p.end = node
     }
+}
+
+func(p *LinkedQueue)EnQueueFirst(data element){
+    p.Lock()
+    defer p.Unlock()
+    node := &LinkNode{Data:data}
+    node.Next = p.head
+    p.head = node
 }
 
 func(p *LinkedQueue)DeQueue()element{
