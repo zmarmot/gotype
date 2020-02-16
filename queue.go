@@ -68,7 +68,7 @@ func(s *SliceQueue)EnQueue(data element){
     s.array = append(s.array,data)
 }
 
-func(s *SliceQueue)EnQueueFrist(data element){
+func(s *SliceQueue)EnQueueFirst(data element){
     s.Lock()
     defer s.Unlock()
     newQueue := []element{data}
